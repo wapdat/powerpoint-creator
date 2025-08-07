@@ -143,8 +143,8 @@ export class PdfConverter {
     
     // Prepare command
     const outputDir = path.dirname(outputPath);
-    const outputFilename = path.basename(outputPath, '.pdf');
-    const tempOutputPath = path.join(outputDir, `${outputFilename}.pdf`);
+    // const outputFilename = path.basename(outputPath, '.pdf');
+    // const tempOutputPath = path.join(outputDir, `${outputFilename}.pdf`);
     
     // LibreOffice command with quality settings
     let qualityArgs = '';
@@ -164,7 +164,7 @@ export class PdfConverter {
     try {
       // Execute conversion
       const timeout = options.timeout || 30000;
-      const { stdout, stderr } = await execAsync(command, { timeout });
+      const { stderr } = await execAsync(command, { timeout });
       
       if (stderr && !stderr.includes('Warning')) {
         console.warn('LibreOffice conversion warnings:', stderr);
@@ -183,7 +183,7 @@ export class PdfConverter {
       
     } catch (error) {
       if ((error as any).code === 'ETIMEDOUT') {
-        throw new Error(`Conversion timed out after ${timeout}ms`);
+        throw new Error(`Conversion timed out after ${options.timeout || 30000}ms`);
       }
       throw error;
     }
@@ -193,9 +193,9 @@ export class PdfConverter {
    * Convert using Puppeteer (requires additional setup)
    */
   private async convertWithPuppeteer(
-    inputPath: string,
-    outputPath: string,
-    options: PdfConversionOptions
+    _inputPath: string,
+    _outputPath: string,
+    _options: PdfConversionOptions
   ): Promise<void> {
     // This would require:
     // 1. Converting PPTX to HTML first
@@ -211,7 +211,7 @@ export class PdfConverter {
   private async convertWithNative(
     inputPath: string,
     outputPath: string,
-    options: PdfConversionOptions
+    _options: PdfConversionOptions
   ): Promise<void> {
     const platform = os.platform();
     

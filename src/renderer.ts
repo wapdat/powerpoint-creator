@@ -195,7 +195,7 @@ export class SlideRenderer {
         await this.renderCustomSlide(slideData as CustomSlide);
         break;
       default:
-        throw new Error(`Unknown slide layout: ${slideData.layout}`);
+        throw new Error(`Unknown slide layout: ${(slideData as any).layout}`);
     }
   }
   
@@ -419,7 +419,10 @@ export class SlideRenderer {
       w: 9,
       h: 4,
       showLegend: slideData.options?.showLegend !== false,
-      legendPos: slideData.options?.legendPosition || 'b',
+      legendPos: (slideData.options?.legendPosition === 'top' ? 't' : 
+                   slideData.options?.legendPosition === 'bottom' ? 'b' :
+                   slideData.options?.legendPosition === 'left' ? 'l' :
+                   slideData.options?.legendPosition === 'right' ? 'r' : 'b') as any,
       showTitle: false,
       showValue: slideData.options?.showDataLabels,
       chartColors: slideData.options?.colors || [

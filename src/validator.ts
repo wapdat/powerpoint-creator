@@ -9,7 +9,6 @@ import {
   Slide,
   ValidationResult,
   ValidationError,
-  SlideLayout,
   ChartType,
 } from './types';
 

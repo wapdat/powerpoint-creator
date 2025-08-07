@@ -100,12 +100,12 @@ async function main(): Promise<void> {
       // Read from STDIN
       spinner.start(chalk.blue('Reading from STDIN...'));
       
-      const chunks: string[] = [];
+      const chunks: Buffer[] = [];
       
       await new Promise<void>((resolve, reject) => {
-        process.stdin.setEncoding('utf-8');
+        // Don't set encoding to get Buffer chunks
         
-        process.stdin.on('data', (chunk) => {
+        process.stdin.on('data', (chunk: Buffer) => {
           chunks.push(chunk);
         });
         
@@ -126,7 +126,7 @@ async function main(): Promise<void> {
       });
       
       try {
-        inputData = JSON.parse(chunks.join(''));
+        inputData = JSON.parse(Buffer.concat(chunks).toString('utf-8'));
         spinner.succeed(chalk.green('STDIN input parsed successfully'));
       } catch (error) {
         spinner.fail(chalk.red('Invalid JSON from STDIN'));
