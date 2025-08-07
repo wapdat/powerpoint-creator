@@ -11,7 +11,7 @@
 ### 1.1 Create a New Repository on GitHub
 
 1. Go to [https://github.com/new](https://github.com/new)
-2. Repository name: `pptx-auto-gen`
+2. Repository name: `powerpoint-creator`
 3. Description: "Professional PowerPoint presentation generator with template support"
 4. Keep it **Public** (required for free NPM publishing)
 5. **DON'T** initialize with README, .gitignore, or license (we already have them)
@@ -23,7 +23,7 @@ After creating the empty repository on GitHub, run these commands:
 
 ```bash
 # Add GitHub as remote origin
-git remote add origin https://github.com/wapdat/pptx-auto-gen.git
+git remote add origin https://github.com/wapdat/powerpoint-creator.git
 
 # Push to GitHub
 git push -u origin main
@@ -36,7 +36,7 @@ If you get an authentication error, you may need to:
 
 Alternative using SSH:
 ```bash
-git remote set-url origin git@github.com:wapdat/pptx-auto-gen.git
+git remote set-url origin git@github.com:wapdat/powerpoint-creator.git
 git push -u origin main
 ```
 
@@ -161,7 +161,7 @@ After publishing, verify your package:
 
 ## 🎉 Success Checklist
 
-- [ ] Repository visible at https://github.com/wapdat/pptx-auto-gen
+- [ ] Repository visible at https://github.com/wapdat/powerpoint-creator
 - [ ] Package visible at https://www.npmjs.com/package/pptx-auto-gen
 - [ ] CLI works: `npx pptx-auto-gen --help`
 - [ ] GitHub Actions badge shows passing
@@ -212,7 +212,7 @@ npx pptx-auto-gen --help
 
 ## 🔗 Important Links
 
-- **Your GitHub Repo**: https://github.com/wapdat/pptx-auto-gen
+- **Your GitHub Repo**: https://github.com/wapdat/powerpoint-creator
 - **Your NPM Package**: https://www.npmjs.com/package/pptx-auto-gen
 - **NPM Tokens**: https://www.npmjs.com/settings/~/tokens
 - **GitHub Tokens**: https://github.com/settings/tokens

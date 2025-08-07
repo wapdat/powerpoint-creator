@@ -57,12 +57,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wapdat/pptx-auto-gen.git"
+    "url": "https://github.com/wapdat/powerpoint-creator.git"
   },
   "bugs": {
-    "url": "https://github.com/wapdat/pptx-auto-gen/issues"
+    "url": "https://github.com/wapdat/powerpoint-creator/issues"
   },
-  "homepage": "https://github.com/wapdat/pptx-auto-gen#readme",
+  "homepage": "https://github.com/wapdat/powerpoint-creator#readme",
   "files": [
     "dist",
     "README.md",
