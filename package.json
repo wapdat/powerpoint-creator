@@ -57,8 +57,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/pptx-auto-gen.git"
+    "url": "https://github.com/wapdat/pptx-auto-gen.git"
   },
+  "bugs": {
+    "url": "https://github.com/wapdat/pptx-auto-gen/issues"
+  },
+  "homepage": "https://github.com/wapdat/pptx-auto-gen#readme",
   "files": [
     "dist",
     "README.md",
