@@ -46,7 +46,7 @@ git push -u origin main
 
 First, check if the name is available:
 ```bash
-npm view pptx-auto-gen
+npm view powerpoint-creator
 ```
 
 If you get a 404 error, the name is available! If not, update the name in `package.json`.
@@ -76,13 +76,13 @@ npm run build
 npm link
 
 # In another directory, test installing
-npm link pptx-auto-gen
+npm link powerpoint-creator
 
 # Test the CLI
-pptx-auto-gen --help
+powerpoint-creator --help
 
 # Unlink when done
-npm unlink pptx-auto-gen
+npm unlink powerpoint-creator
 ```
 
 ### 2.5 Publish to NPM
@@ -92,7 +92,7 @@ npm unlink pptx-auto-gen
 npm publish
 
 # If the package name is taken, you can scope it to your username
-# Update package.json name to: "@wapdat/pptx-auto-gen"
+# Update package.json name to: "@wapdat/powerpoint-creator"
 # Then publish with public access
 npm publish --access public
 ```
@@ -151,19 +151,19 @@ npm publish
 
 After publishing, verify your package:
 
-1. **View on NPM**: https://www.npmjs.com/package/pptx-auto-gen
+1. **View on NPM**: https://www.npmjs.com/package/powerpoint-creator
 2. **Test installation**:
    ```bash
    # In a new directory
-   npm install -g pptx-auto-gen
-   pptx-auto-gen --help
+   npm install -g powerpoint-creator
+   powerpoint-creator --help
    ```
 
 ## 🎉 Success Checklist
 
 - [ ] Repository visible at https://github.com/wapdat/powerpoint-creator
-- [ ] Package visible at https://www.npmjs.com/package/pptx-auto-gen
-- [ ] CLI works: `npx pptx-auto-gen --help`
+- [ ] Package visible at https://www.npmjs.com/package/powerpoint-creator
+- [ ] CLI works: `npx powerpoint-creator --help`
 - [ ] GitHub Actions badge shows passing
 
 ## 🆘 Troubleshooting
@@ -172,7 +172,7 @@ After publishing, verify your package:
 
 1. **E403 Forbidden**: You need to login: `npm login`
 2. **E402 Payment Required**: Name might be too similar to existing package
-3. **E403 Package name not allowed**: Try scoping: `@wapdat/pptx-auto-gen`
+3. **E403 Package name not allowed**: Try scoping: `@wapdat/powerpoint-creator`
 
 ### GitHub Push Errors
 
@@ -202,18 +202,18 @@ npm login
 npm run build
 npm publish
 npm version patch
-npm view pptx-auto-gen
+npm view powerpoint-creator
 
 # Testing
 npm link
 npm run example
-npx pptx-auto-gen --help
+npx powerpoint-creator --help
 ```
 
 ## 🔗 Important Links
 
 - **Your GitHub Repo**: https://github.com/wapdat/powerpoint-creator
-- **Your NPM Package**: https://www.npmjs.com/package/pptx-auto-gen
+- **Your NPM Package**: https://www.npmjs.com/package/powerpoint-creator
 - **NPM Tokens**: https://www.npmjs.com/settings/~/tokens
 - **GitHub Tokens**: https://github.com/settings/tokens
 

@@ -1,11 +1,11 @@
 {
-  "name": "pptx-auto-gen",
+  "name": "powerpoint-creator",
   "version": "1.0.0",
   "description": "Professional PowerPoint presentation generator with template support",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "pptx-auto-gen": "./dist/cli.js"
+    "powerpoint-creator": "./dist/cli.js"
   },
   "scripts": {
     "build": "tsc",

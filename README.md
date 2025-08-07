@@ -1,11 +1,11 @@
-# 🎯 pptx-auto-gen
+# 🎯 powerpoint-creator
 
 <div align="center">
   <h3>✨ Professional PowerPoint Generator with Template Support ✨</h3>
   <p><strong>Transform JSON into stunning, business-ready presentations programmatically</strong></p>
   
   <p>
-    <img src="https://img.shields.io/npm/v/pptx-auto-gen?style=flat-square&color=blue" alt="NPM Version">
+    <img src="https://img.shields.io/npm/v/powerpoint-creator?style=flat-square&color=blue" alt="NPM Version">
     <img src="https://img.shields.io/badge/TypeScript-Ready-blue?style=flat-square&logo=typescript" alt="TypeScript">
     <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License">
     <img src="https://img.shields.io/badge/Node-16+-green?style=flat-square&logo=node.js" alt="Node Version">
@@ -14,7 +14,7 @@
 
 ---
 
-## 🌟 Why pptx-auto-gen?
+## 🌟 Why powerpoint-creator?
 
 > **Stop manually creating repetitive presentations.** Generate professional PowerPoint files programmatically with complete control over styling, templates, and content.
 
@@ -73,7 +73,7 @@
     
 **Global CLI Installation**
 ```bash
-npm install -g pptx-auto-gen
+npm install -g powerpoint-creator
 ```
 
   </div>
@@ -81,7 +81,7 @@ npm install -g pptx-auto-gen
     
 **Project Installation**
 ```bash
-npm install pptx-auto-gen
+npm install powerpoint-creator
 ```
 
   </div>
@@ -92,18 +92,18 @@ npm install pptx-auto-gen
 #### **Option 1: CLI** (Fastest)
 ```bash
 # Generate from JSON file
-pptx-auto-gen --input slides.json --output my-presentation.pptx
+powerpoint-creator --input slides.json --output my-presentation.pptx
 
 # Use a corporate template
-pptx-auto-gen --input slides.json --template corporate.pptx --output final.pptx
+powerpoint-creator --input slides.json --template corporate.pptx --output final.pptx
 
 # Convert to PDF automatically
-pptx-auto-gen --input slides.json --output presentation.pptx --pdf
+powerpoint-creator --input slides.json --output presentation.pptx --pdf
 ```
 
 #### **Option 2: Programmatic API**
 ```typescript
-import { generatePresentation } from 'pptx-auto-gen';
+import { generatePresentation } from 'powerpoint-creator';
 
 const presentation = {
   title: "Q4 2024 Results",
@@ -240,7 +240,7 @@ Transform any existing PowerPoint into a reusable template:
 
 ```mermaid
 graph LR
-    A[Your Brand Template] --> B[pptx-auto-gen]
+    A[Your Brand Template] --> B[powerpoint-creator]
     C[JSON Data] --> B
     B --> D[Branded Presentation]
     
@@ -257,7 +257,7 @@ graph LR
 # ✅ Slide masters
 # ✅ Brand guidelines
 
-pptx-auto-gen --input data.json --template corporate-brand.pptx --output final.pptx
+powerpoint-creator --input data.json --template corporate-brand.pptx --output final.pptx
 ```
 
 ---
@@ -283,7 +283,7 @@ pptx-auto-gen --input data.json --template corporate-brand.pptx --output final.p
 ```bash
 # Process multiple presentations in parallel
 for file in *.json; do
-  pptx-auto-gen --input "$file" --output "${file%.json}.pptx" &
+  powerpoint-creator --input "$file" --output "${file%.json}.pptx" &
 done
 wait
 ```
@@ -291,13 +291,13 @@ wait
 **📊 Dynamic Data Integration**
 ```bash
 # Generate from API response
-curl https://api.example.com/data | pptx-auto-gen --output report.pptx
+curl https://api.example.com/data | powerpoint-creator --output report.pptx
 ```
 
 **🎯 Batch Processing**
 ```bash
 # Convert all presentations to PDF
-find . -name "*.json" -exec pptx-auto-gen --input {} --output {}.pptx --pdf \;
+find . -name "*.json" -exec powerpoint-creator --input {} --output {}.pptx --pdf \;
 ```
 
 </div>
@@ -314,7 +314,7 @@ import {
   validateInput,
   Presentation,
   SlideLayout 
-} from 'pptx-auto-gen';
+} from 'powerpoint-creator';
 
 // Full type safety with TypeScript
 const createSalesPresentation = async (data: SalesData): Promise<void> => {
@@ -406,7 +406,7 @@ Download from [libreoffice.org](https://www.libreoffice.org/download/)
 
 ```bash
 # Single command for PPTX + PDF
-pptx-auto-gen --input slides.json --output presentation.pptx --pdf
+powerpoint-creator --input slides.json --output presentation.pptx --pdf
 
 # Output:
 # ✅ presentation.pptx (PowerPoint)
@@ -418,7 +418,7 @@ pptx-auto-gen --input slides.json --output presentation.pptx --pdf
 ## 🏗️ Project Structure
 
 ```
-pptx-auto-gen/
+powerpoint-creator/
 ├── 📁 src/
 │   ├── 📄 cli.ts           # CLI entry point with yargs
 │   ├── 📄 index.ts         # Main API exports
@@ -508,7 +508,7 @@ const createCampaignDeck = async (campaign: Campaign) => {
 ### 📋 Comprehensive Validation
 
 ```typescript
-import { validateInput } from 'pptx-auto-gen';
+import { validateInput } from 'powerpoint-creator';
 
 const result = validateInput(presentationData);
 if (!result.valid) {
@@ -604,7 +604,7 @@ Built with these excellent libraries:
 <div align="center">
   <p>
     <a href="https://github.com/wapdat/powerpoint-creator">📦 GitHub</a> •
-    <a href="https://www.npmjs.com/package/pptx-auto-gen">🚀 NPM</a> •
+    <a href="https://www.npmjs.com/package/powerpoint-creator">🚀 NPM</a> •
     <a href="https://github.com/wapdat/powerpoint-creator/issues">🐛 Issues</a> •
     <a href="https://github.com/wapdat/powerpoint-creator/wiki">📚 Wiki</a>
   </p>
