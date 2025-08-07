@@ -1,0 +1,55 @@
+# Source files (only include dist)
+src/
+*.ts
+!*.d.ts
+
+# Configuration files
+tsconfig.json
+.eslintrc*
+.prettierrc*
+jest.config.*
+
+# Development files
+examples/
+docs/
+coverage/
+.github/
+.vscode/
+.idea/
+
+# Test files
+**/*.test.*
+**/*.spec.*
+__tests__/
+test/
+
+# Build files
+*.tsbuildinfo
+
+# Git files
+.git/
+.gitignore
+
+# Environment files
+.env*
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# Local settings
+.claude/

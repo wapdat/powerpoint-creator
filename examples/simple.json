@@ -1,0 +1,52 @@
+{
+  "title": "Simple Presentation Example",
+  "author": "John Doe",
+  "slides": [
+    {
+      "layout": "title",
+      "title": "Welcome to pptx-auto-gen",
+      "subtitle": "Automated PowerPoint Generation Made Easy"
+    },
+    {
+      "layout": "text",
+      "title": "Features",
+      "bullets": [
+        "Generate professional presentations from JSON",
+        "Support for multiple slide layouts",
+        "Template-based generation",
+        "Export to PDF",
+        "Command-line interface"
+      ]
+    },
+    {
+      "layout": "chart",
+      "title": "Sample Data Visualization",
+      "chartType": "bar",
+      "data": {
+        "labels": ["Jan", "Feb", "Mar", "Apr"],
+        "datasets": [
+          {
+            "label": "Sales",
+            "data": [65, 75, 85, 95],
+            "backgroundColor": "#3498DB"
+          }
+        ]
+      }
+    },
+    {
+      "layout": "table",
+      "title": "Comparison Table",
+      "headers": ["Feature", "Basic", "Pro", "Enterprise"],
+      "tableData": [
+        ["Slides", "10", "50", "Unlimited"],
+        ["Templates", "5", "20", "Custom"],
+        ["Support", "Email", "Priority", "Dedicated"]
+      ]
+    },
+    {
+      "layout": "title",
+      "title": "Thank You!",
+      "subtitle": "Start creating amazing presentations today"
+    }
+  ]
+}
