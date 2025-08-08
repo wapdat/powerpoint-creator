@@ -256,11 +256,18 @@ export class MarkdownConverter {
     renderer.table = (header: string, body: string): string => {
       this.flushCurrentSlide(context);
       
-      // Parse table structure
-      const headers = this.parseTableRow(header);
-      const rows = body.split('\n')
-        .filter(row => row.trim())
-        .map(row => this.parseTableRow(row));
+      // Parse HTML table structure
+      const headers = this.parseHTMLTableRow(header, 'th');
+      
+      // Parse all rows from body - body contains multiple <tr> elements
+      const rows: string[][] = [];
+      const rowMatches = body.match(/<tr[^>]*>[\s\S]*?<\/tr>/g) || [];
+      for (const rowHtml of rowMatches) {
+        const rowData = this.parseHTMLTableRow(rowHtml, 'td');
+        if (rowData.length > 0) {
+          rows.push(rowData);
+        }
+      }
 
       // Check if table contains chart data
       if (this.isChartTable(headers, rows)) {
@@ -542,13 +549,19 @@ export class MarkdownConverter {
   }
 
   /**
-   * Parse table row from markdown
+   * Parse HTML table row
    */
-  private parseTableRow(row: string): string[] {
-    return row
-      .split('|')
-      .map(cell => cell.trim())
-      .filter(cell => cell && !cell.match(/^:?-+:?$/)); // Remove separator cells
+  private parseHTMLTableRow(html: string, cellTag: 'th' | 'td'): string[] {
+    // Extract cell contents from HTML
+    const regex = new RegExp(`<${cellTag}[^>]*>([^<]*)<\/${cellTag}>`, 'g');
+    const cells: string[] = [];
+    let match;
+    
+    while ((match = regex.exec(html)) !== null) {
+      cells.push(this.cleanText(match[1]));
+    }
+    
+    return cells;
   }
 
   /**
