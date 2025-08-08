@@ -1,0 +1,20 @@
+{
+  "title": "Minimal Test",
+  "author": "Test User",
+  "slides": [
+    {
+      "layout": "title",
+      "title": "Simple Title Slide",
+      "subtitle": "Testing minimal features"
+    },
+    {
+      "layout": "text",
+      "title": "Simple Bullet Slide",
+      "bullets": [
+        "First bullet point",
+        "Second bullet point",
+        "Third bullet point"
+      ]
+    }
+  ]
+}

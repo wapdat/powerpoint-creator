@@ -1,0 +1,85 @@
+{
+  "title": "AI Fundamentals Workshop",
+  "author": "Dr. Emily Chen",
+  "slides": [
+    {
+      "layout": "title",
+      "title": "Introduction to Artificial Intelligence",
+      "subtitle": "A Beginner's Workshop",
+      "author": "Dr. Emily Chen",
+      "date": "March 2025"
+    },
+    {
+      "layout": "text",
+      "title": "What is AI?",
+      "bullets": [
+        "Artificial Intelligence is the simulation of human intelligence by machines",
+        "Key capabilities include:",
+        "  • Learning from experience",
+        "  • Understanding natural language",
+        "  • Recognizing patterns",
+        "  • Making decisions",
+        "  • Solving problems"
+      ],
+      "level": [0, 0, 1, 1, 1, 1, 1]
+    },
+    {
+      "layout": "chart",
+      "title": "AI Market Growth",
+      "chartType": "line",
+      "data": {
+        "labels": ["2020", "2021", "2022", "2023", "2024", "2025"],
+        "datasets": [
+          {
+            "label": "Market Size ($ Billions)",
+            "data": [50, 75, 120, 200, 350, 500],
+            "backgroundColor": "#8b5cf6",
+            "borderColor": "#8b5cf6"
+          }
+        ]
+      }
+    },
+    {
+      "layout": "table",
+      "title": "Types of AI",
+      "headers": ["Type", "Description", "Example"],
+      "tableData": [
+        ["Narrow AI", "Designed for specific tasks", "Siri, Alexa"],
+        ["General AI", "Human-level intelligence", "Not yet achieved"],
+        ["Super AI", "Surpasses human intelligence", "Theoretical"]
+      ]
+    },
+    {
+      "layout": "text",
+      "title": "Real-World Applications",
+      "bullets": [
+        "🏥 Healthcare: Disease diagnosis, drug discovery",
+        "🚗 Transportation: Self-driving cars, traffic optimization",
+        "💰 Finance: Fraud detection, algorithmic trading",
+        "🛍️ Retail: Personalized recommendations, inventory management",
+        "📱 Technology: Voice assistants, facial recognition"
+      ]
+    },
+    {
+      "layout": "chart",
+      "title": "Workshop Schedule",
+      "chartType": "pie",
+      "data": {
+        "labels": ["Theory", "Hands-on Labs", "Case Studies", "Q&A", "Break"],
+        "datasets": [
+          {
+            "label": "Time Allocation",
+            "data": [30, 40, 20, 15, 15],
+            "backgroundColor": ["#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#94a3b8"]
+          }
+        ]
+      }
+    },
+    {
+      "layout": "title",
+      "title": "Let's Get Started!",
+      "subtitle": "Questions before we begin?",
+      "backgroundColor": "#8b5cf6"
+    }
+  ]
+}

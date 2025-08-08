@@ -1,0 +1,149 @@
+{
+  "title": "CloudSync Pro - Product Launch",
+  "author": "Marketing Team",
+  "subject": "New Product Introduction",
+  "company": "Digital Solutions Ltd",
+  "slides": [
+    {
+      "layout": "title",
+      "title": "Introducing CloudSync Pro",
+      "subtitle": "The Future of Cloud Storage Management",
+      "author": "Digital Solutions Ltd",
+      "date": "February 2025",
+      "backgroundColor": "#6366f1",
+      "notes": "Welcome to the launch of CloudSync Pro - our revolutionary cloud storage management solution."
+    },
+    {
+      "layout": "text",
+      "title": "The Problem We're Solving",
+      "bullets": [
+        "📁 <strong>Data Fragmentation:</strong> Average company uses 5+ cloud storage providers",
+        "🔄 <strong>Sync Issues:</strong> 73% of businesses report file version conflicts",
+        "💰 <strong>Hidden Costs:</strong> $2.3M average annual waste on duplicate storage",
+        "🔒 <strong>Security Gaps:</strong> 45% lack unified access control",
+        "⏰ <strong>Time Loss:</strong> 2.5 hours/week per employee searching for files"
+      ],
+      "notes": "These pain points cost businesses millions in lost productivity and storage costs."
+    },
+    {
+      "layout": "text",
+      "title": "CloudSync Pro - The Solution",
+      "bullets": [
+        "<strong>One Platform, All Clouds</strong>",
+        "  • Connect Google Drive, Dropbox, OneDrive, AWS S3, and more",
+        "  • Single dashboard for all your storage",
+        "<strong>Intelligent Sync Engine</strong>",
+        "  • AI-powered conflict resolution",
+        "  • Real-time collaboration across platforms",
+        "<strong>Cost Optimization</strong>",
+        "  • Automatic duplicate detection",
+        "  • Storage analytics and recommendations",
+        "<strong>Enterprise Security</strong>",
+        "  • End-to-end encryption",
+        "  • Unified access management"
+      ],
+      "level": [0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1]
+    },
+    {
+      "layout": "chart",
+      "title": "Performance Comparison",
+      "chartType": "bar",
+      "data": {
+        "labels": ["Sync Speed", "Storage Efficiency", "Security Score", "User Satisfaction", "Cost Savings"],
+        "datasets": [
+          {
+            "label": "CloudSync Pro",
+            "data": [95, 92, 98, 94, 87],
+            "backgroundColor": "#10b981"
+          },
+          {
+            "label": "Competitor Average",
+            "data": [72, 68, 75, 71, 62],
+            "backgroundColor": "#94a3b8"
+          }
+        ]
+      },
+      "options": {
+        "showLegend": true,
+        "legendPosition": "top"
+      },
+      "notes": "CloudSync Pro outperforms competitors across all key metrics."
+    },
+    {
+      "layout": "table",
+      "title": "Pricing Plans",
+      "headers": ["Plan", "Users", "Storage", "Features", "Price/Month"],
+      "tableData": [
+        ["Starter", "Up to 5", "100 GB", "Basic sync, 3 cloud providers", "$49"],
+        ["Professional", "Up to 25", "1 TB", "Advanced sync, 10 providers, Analytics", "$199"],
+        ["Business", "Up to 100", "5 TB", "All features, Priority support", "$599"],
+        ["Enterprise", "Unlimited", "Unlimited", "Custom features, Dedicated support", "Custom"]
+      ],
+      "styling": {
+        "headerBackground": "#6366f1",
+        "headerTextColor": "#FFFFFF",
+        "alternateRows": true
+      }
+    },
+    {
+      "layout": "chart",
+      "title": "ROI Timeline",
+      "chartType": "line",
+      "data": {
+        "labels": ["Month 1", "Month 3", "Month 6", "Month 9", "Month 12"],
+        "datasets": [
+          {
+            "label": "Cost Savings ($K)",
+            "data": [5, 18, 42, 75, 125],
+            "backgroundColor": "#10b981",
+            "borderColor": "#10b981"
+          },
+          {
+            "label": "Investment ($K)",
+            "data": [15, 15, 15, 15, 15],
+            "backgroundColor": "#ef4444",
+            "borderColor": "#ef4444"
+          }
+        ]
+      },
+      "notes": "Most customers see positive ROI within 3 months of implementation."
+    },
+    {
+      "layout": "text",
+      "title": "Customer Success Stories",
+      "bullets": [
+        "🏢 <strong>TechCorp:</strong> \"Reduced storage costs by 67% in 6 months\"",
+        "🏥 <strong>MediHealth:</strong> \"Improved file access speed by 4x\"",
+        "🎓 <strong>EduGlobal:</strong> \"Unified 12 different storage systems seamlessly\"",
+        "🏦 <strong>FinanceHub:</strong> \"Achieved 100% compliance with data regulations\"",
+        "🛍️ <strong>RetailMax:</strong> \"Saved 15 hours per week on file management\""
+      ]
+    },
+    {
+      "layout": "text",
+      "title": "Launch Offer - Limited Time",
+      "bullets": [
+        "🎁 <strong>50% OFF</strong> first 3 months on any plan",
+        "🚀 <strong>FREE</strong> migration assistance (valued at $2,000)",
+        "📚 <strong>FREE</strong> training for your entire team",
+        "⭐ <strong>BONUS:</strong> Priority support for 12 months",
+        "🔒 <strong>30-day</strong> money-back guarantee"
+      ],
+      "notes": "This exclusive launch offer is available for the first 100 customers only."
+    },
+    {
+      "layout": "title",
+      "title": "Get Started Today",
+      "subtitle": "Visit cloudsyncpro.com or call 1-800-SYNC-NOW",
+      "backgroundColor": "#10b981",
+      "notes": "Thank you for your time. Visit our website or call us to start your free trial today!"
+    }
+  ],
+  "theme": {
+    "primaryColor": "#6366f1",
+    "secondaryColor": "#10b981",
+    "accentColor": "#f59e0b",
+    "fontFamily": "Arial",
+    "fontSize": 16
+  }
+}

@@ -25,40 +25,61 @@ import {
  */
 const COLOR_SCHEMES = {
   professional: {
-    primary: '#2C3E50',
-    secondary: '#34495E',
-    accent: '#3498DB',
-    success: '#27AE60',
-    warning: '#F39C12',
-    danger: '#E74C3C',
-    light: '#ECF0F1',
-    dark: '#1A1A1A',
+    primary: '#2C3E50',      // Dark blue-gray
+    secondary: '#546E7A',     // Slate gray
+    accent: '#1976D2',        // Professional blue
+    success: '#388E3C',       // Forest green
+    warning: '#F57C00',       // Muted orange
+    danger: '#D32F2F',        // Muted red
+    light: '#F5F5F5',         // Light gray
+    dark: '#263238',          // Dark gray
+    // Chart colors - professional palette
+    chart1: '#37474F',        // Charcoal
+    chart2: '#607D8B',        // Blue-gray
+    chart3: '#90A4AE',        // Light blue-gray
+    chart4: '#455A64',        // Dark slate
+    chart5: '#78909C',        // Medium blue-gray
+    chart6: '#B0BEC5',        // Light slate
   },
   corporate: {
-    primary: '#003366',
-    secondary: '#005599',
-    accent: '#0077CC',
-    success: '#00AA44',
-    warning: '#FFAA00',
-    danger: '#CC0000',
-    light: '#F5F5F5',
-    dark: '#333333',
+    primary: '#1E3A5F',       // Navy blue
+    secondary: '#4A5F7A',     // Steel blue
+    accent: '#2E5090',        // Corporate blue
+    success: '#2E7D32',       // Professional green
+    warning: '#ED6C02',       // Amber
+    danger: '#C62828',        // Corporate red
+    light: '#FAFAFA',         // Off white
+    dark: '#1A1A1A',          // Near black
+    // Chart colors - corporate palette
+    chart1: '#1E3A5F',        // Navy
+    chart2: '#4A5F7A',        // Steel blue
+    chart3: '#7A8B99',        // Gray-blue
+    chart4: '#2E5090',        // Royal blue
+    chart5: '#5C7CAD',        // Soft blue
+    chart6: '#9FAFC4',        // Light steel
   },
   modern: {
-    primary: '#6C63FF',
-    secondary: '#4A47A3',
-    accent: '#FF6584',
-    success: '#00BFA6',
-    warning: '#FFA726',
-    danger: '#EF5350',
-    light: '#FAFAFA',
-    dark: '#212121',
+    primary: '#424242',       // Charcoal
+    secondary: '#616161',     // Medium gray
+    accent: '#1565C0',        // Modern blue
+    success: '#2E7D32',       // Green
+    warning: '#EF6C00',       // Orange
+    danger: '#C62828',        // Red
+    light: '#FAFAFA',         // White
+    dark: '#212121',          // Dark
+    // Chart colors - modern palette
+    chart1: '#424242',        // Charcoal
+    chart2: '#757575',        // Gray
+    chart3: '#9E9E9E',        // Light gray
+    chart4: '#1565C0',        // Blue
+    chart5: '#42A5F5',        // Light blue
+    chart6: '#BDBDBD',        // Silver
   },
 };
 
 export class SlideRenderer {
   private pptx: PptxGenJS;
-  private colorScheme: typeof COLOR_SCHEMES.professional;
+  private colorScheme: any; // Dynamic color scheme
   
   constructor(theme: string = 'professional') {
     this.pptx = new PptxGenJS();
@@ -70,73 +91,21 @@ export class SlideRenderer {
    * Setup default presentation properties
    */
   private setupPresentation(): void {
-    this.pptx.author = 'pptx-auto-gen';
-    this.pptx.company = 'Generated Presentation';
-    this.pptx.revision = '1.0.0';
-    this.pptx.subject = 'Professional Presentation';
+    // Set minimal metadata to avoid potential XML issues
+    this.pptx.author = 'PowerPoint Creator';
     this.pptx.title = 'Presentation';
     
     // Set default layout
     this.pptx.layout = 'LAYOUT_16x9';
-    
-    // Define master slide
-    this.pptx.defineSlideMaster({
-      title: 'MASTER_SLIDE',
-      background: { color: 'FFFFFF' },
-      objects: [
-        {
-          placeholder: {
-            options: {
-              name: 'title',
-              type: 'title',
-              x: 0.5,
-              y: 0.5,
-              w: 9,
-              h: 1.5,
-              fontSize: 32,
-              bold: true,
-              color: this.colorScheme.primary,
-              fontFace: 'Arial',
-            },
-          },
-        },
-        {
-          placeholder: {
-            options: {
-              name: 'body',
-              type: 'body',
-              x: 0.5,
-              y: 2.5,
-              w: 9,
-              h: 4,
-              fontSize: 18,
-              color: this.colorScheme.dark,
-              fontFace: 'Arial',
-            },
-          },
-        },
-        {
-          line: {
-            x: 0.5,
-            y: 2.2,
-            w: 9,
-            h: 0,
-            line: { color: this.colorScheme.accent, width: 2 },
-          },
-        },
-      ],
-    });
   }
   
   /**
    * Render a complete presentation
    */
   async renderPresentation(presentation: Presentation): Promise<Buffer> {
-    // Set presentation metadata
+    // Set only essential metadata to avoid XML issues
     if (presentation.title) this.pptx.title = presentation.title;
     if (presentation.author) this.pptx.author = presentation.author;
-    if (presentation.subject) this.pptx.subject = presentation.subject;
-    if (presentation.company) this.pptx.company = presentation.company;
     
     // Apply theme if provided
     if (presentation.theme) {
@@ -264,36 +233,48 @@ export class SlideRenderer {
    * Render text slide with bullets
    */
   private async renderTextSlide(slideData: TextSlide): Promise<void> {
-    const slide = this.pptx.addSlide({ masterName: 'MASTER_SLIDE' });
+    const slide = this.pptx.addSlide();
     
-    // Add title
+    // Add title with padding
     slide.addText(slideData.title, {
-      placeholder: 'title',
+      x: 0.75,
+      y: 0.4,
+      w: 8.5,
+      h: 0.8,
+      fontSize: 22,
+      bold: true,
+      color: this.colorScheme.primary,
+      fontFace: 'Arial',
     });
     
-    // Process bullets with HTML support
-    const bulletPoints = slideData.bullets.map((bullet, index) => {
-      const level = slideData.level?.[index] || 0;
-      return {
-        text: this.processHtmlText(bullet),
-        options: {
-          bullet: { type: level === 0 ? 'bullet' : 'number' },
-          indentLevel: level,
-        },
-      };
+    // Process and clean bullet text
+    const processedBullets: string[] = [];
+    slideData.bullets.forEach((bullet) => {
+      // Strip HTML tags and markdown for now to avoid XML issues
+      let cleanText = bullet
+        .replace(/<strong>(.*?)<\/strong>/gi, '$1')
+        .replace(/<em>(.*?)<\/em>/gi, '$1')
+        .replace(/<i>(.*?)<\/i>/gi, '$1')
+        .replace(/<u>(.*?)<\/u>/gi, '$1')
+        .replace(/\*\*(.*?)\*\*/g, '$1')
+        .replace(/\*(.*?)\*/g, '$1')
+        .replace(/__(.*?)__/g, '$1')
+        .replace(/<[^>]*>/g, '');
+      
+      processedBullets.push(cleanText);
     });
     
-    // Add bullets
-    slide.addText(bulletPoints as any, {
-      x: 0.5,
-      y: 2.5,
-      w: 9,
-      h: 4,
-      fontSize: 18,
+    // Add bullets positioned properly
+    const bulletText = processedBullets.map(text => ({ text, options: { bullet: true } }));
+    slide.addText(bulletText, {
+      x: 0.75,
+      y: 1.3,
+      w: 8.5,
+      h: 4.5,
+      fontSize: 16,
       color: this.colorScheme.dark,
       fontFace: 'Arial',
-      bullet: true,
-      lineSpacing: 28,
+      lineSpacing: 28
     });
     
     // Add speaker notes
@@ -306,11 +287,18 @@ export class SlideRenderer {
    * Render image slide
    */
   private async renderImageSlide(slideData: ImageSlide): Promise<void> {
-    const slide = this.pptx.addSlide({ masterName: 'MASTER_SLIDE' });
+    const slide = this.pptx.addSlide();
     
-    // Add title
+    // Add title with padding
     slide.addText(slideData.title, {
-      placeholder: 'title',
+      x: 0.75,
+      y: 0.4,
+      w: 8.5,
+      h: 0.8,
+      fontSize: 22,
+      bold: true,
+      color: this.colorScheme.primary,
+      fontFace: 'Arial',
     });
     
     // Prepare image data
@@ -340,14 +328,14 @@ export class SlideRenderer {
       imageData = '';
     }
     
-    // Add image
+    // Add image positioned higher
     if (imageData) {
       const sizing = slideData.sizing || 'contain';
       const imageOptions: any = {
-        x: 0.5,
-        y: 2.5,
-        w: 9,
-        h: 3.5,
+        x: 1,
+        y: 1.3,
+        w: 8,
+        h: slideData.caption ? 3.8 : 4.2,
       };
       
       if (sizing === 'contain') {
@@ -362,13 +350,13 @@ export class SlideRenderer {
       });
     }
     
-    // Add caption
+    // Add caption with proper positioning
     if (slideData.caption) {
       slide.addText(slideData.caption, {
         x: 0.5,
-        y: 6.2,
+        y: 6.1,
         w: 9,
-        h: 0.5,
+        h: 0.4,
         fontSize: 14,
         italic: true,
         color: this.colorScheme.secondary,
@@ -387,11 +375,18 @@ export class SlideRenderer {
    * Render chart slide
    */
   private async renderChartSlide(slideData: ChartSlide): Promise<void> {
-    const slide = this.pptx.addSlide({ masterName: 'MASTER_SLIDE' });
+    const slide = this.pptx.addSlide();
     
-    // Add title
+    // Add title with padding
     slide.addText(slideData.title, {
-      placeholder: 'title',
+      x: 0.75,
+      y: 0.4,
+      w: 8.5,
+      h: 0.8,
+      fontSize: 22,
+      bold: true,
+      color: this.colorScheme.primary,
+      fontFace: 'Arial',
     });
     
     // Map chart type to PptxGenJS format
@@ -412,25 +407,31 @@ export class SlideRenderer {
       values: dataset.data,
     }));
     
-    // Add chart
+    // Add chart positioned higher to fit properly
     slide.addChart(chartTypeMap[slideData.chartType], chartData, {
-      x: 0.5,
-      y: 2.5,
-      w: 9,
-      h: 4,
+      x: 1,
+      y: 1.3,
+      w: 8,
+      h: 3.8,
       showLegend: slideData.options?.showLegend !== false,
       legendPos: (slideData.options?.legendPosition === 'top' ? 't' : 
                    slideData.options?.legendPosition === 'bottom' ? 'b' :
                    slideData.options?.legendPosition === 'left' ? 'l' :
-                   slideData.options?.legendPosition === 'right' ? 'r' : 'b') as any,
+                   slideData.options?.legendPosition === 'right' ? 'r' : 'r') as any,
+      legendFontSize: 10,
       showTitle: false,
       showValue: slideData.options?.showDataLabels,
       chartColors: slideData.options?.colors || [
-        this.colorScheme.accent,
-        this.colorScheme.success,
-        this.colorScheme.warning,
-        this.colorScheme.danger,
+        this.colorScheme.chart1 || this.colorScheme.primary,
+        this.colorScheme.chart2 || this.colorScheme.secondary,
+        this.colorScheme.chart3 || this.colorScheme.accent,
+        this.colorScheme.chart4 || this.colorScheme.success,
+        this.colorScheme.chart5 || this.colorScheme.warning,
+        this.colorScheme.chart6 || this.colorScheme.danger,
       ],
+      valAxisLabelFontSize: 9,
+      catAxisLabelFontSize: 9,
+      dataLabelFontSize: 8,
     });
     
     // Add speaker notes
@@ -443,11 +444,18 @@ export class SlideRenderer {
    * Render table slide
    */
   private async renderTableSlide(slideData: TableSlide): Promise<void> {
-    const slide = this.pptx.addSlide({ masterName: 'MASTER_SLIDE' });
+    const slide = this.pptx.addSlide();
     
-    // Add title
+    // Add title with padding
     slide.addText(slideData.title, {
-      placeholder: 'title',
+      x: 0.75,
+      y: 0.4,
+      w: 8.5,
+      h: 0.8,
+      fontSize: 22,
+      bold: true,
+      color: this.colorScheme.primary,
+      fontFace: 'Arial',
     });
     
     // Prepare table data
@@ -461,6 +469,8 @@ export class SlideRenderer {
           bold: true,
           color: slideData.styling?.headerTextColor || 'FFFFFF',
           fill: slideData.styling?.headerBackground || this.colorScheme.primary,
+          align: 'center',
+          valign: 'middle',
         },
       })));
     }
@@ -473,16 +483,23 @@ export class SlideRenderer {
         options: {
           color: this.colorScheme.dark,
           fill: isAlternate ? this.colorScheme.light : 'FFFFFF',
+          align: 'left',
+          valign: 'middle',
         },
       })));
     });
     
-    // Add table
+    // Calculate optimal row height
+    const totalRows = rows.length;
+    const availableHeight = 4.2;
+    const rowHeight = Math.min(availableHeight / totalRows, 0.4);
+    
+    // Add table positioned higher
     slide.addTable(rows as any, {
-      x: 0.5,
-      y: 2.5,
-      w: 9,
-      h: 4,
+      x: 0.75,
+      y: 1.3,
+      w: 8.5,
+      h: 4.2,
       fontSize: slideData.styling?.fontSize || 14,
       fontFace: 'Arial',
       border: {
@@ -491,6 +508,8 @@ export class SlideRenderer {
         pt: slideData.styling?.borderWidth || 1,
       },
       autoPage: false,
+      rowH: rowHeight,
+      margin: [0.1, 0.1, 0.1, 0.1],
     });
     
     // Add speaker notes
@@ -503,23 +522,31 @@ export class SlideRenderer {
    * Render notes slide
    */
   private async renderNotesSlide(slideData: NotesSlide): Promise<void> {
-    const slide = this.pptx.addSlide({ masterName: 'MASTER_SLIDE' });
+    const slide = this.pptx.addSlide();
     
-    // Add title
+    // Add title with padding
     slide.addText(slideData.title, {
-      placeholder: 'title',
+      x: 0.75,
+      y: 0.4,
+      w: 8.5,
+      h: 0.8,
+      fontSize: 22,
+      bold: true,
+      color: this.colorScheme.primary,
+      fontFace: 'Arial',
     });
     
-    // Add content
+    // Add content positioned properly
     slide.addText(slideData.content, {
-      x: 0.5,
-      y: 2.5,
-      w: 9,
-      h: 4,
+      x: 0.75,
+      y: 1.3,
+      w: 8.5,
+      h: 4.5,
       fontSize: 16,
       color: this.colorScheme.dark,
       fontFace: 'Arial',
       valign: 'top',
+      lineSpacing: 24,
     });
     
     // Add as speaker notes as well
@@ -602,16 +629,6 @@ export class SlideRenderer {
     }
   }
   
-  /**
-   * Process HTML text for formatting
-   */
-  private processHtmlText(text: string): string {
-    // Basic HTML tag processing
-    return text
-      .replace(/<strong>(.*?)<\/strong>/g, '**$1**')
-      .replace(/<em>(.*?)<\/em>/g, '*$1*')
-      .replace(/<u>(.*?)<\/u>/g, '_$1_')
-      .replace(/<br\s*\/?>/g, '\n')
-      .replace(/<[^>]*>/g, ''); // Remove any remaining HTML tags
-  }
+  
+  
 }

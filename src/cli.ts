@@ -20,7 +20,7 @@ import { CLIOptions, Presentation } from './types';
 const argv = yargs(hideBin(process.argv))
   .scriptName('powerpoint-creator')
   .usage('$0 [options]')
-  .command('$0', 'Generate professional PowerPoint presentations from JSON data')
+  .command('$0', 'Generate professional PowerPoint presentations from structured JSON data')
   .option('input', {
     alias: 'i',
     type: 'string',
@@ -81,57 +81,167 @@ const argv = yargs(hideBin(process.argv))
     ['$0 -i report.json -t brand.pptx -o final.pptx --pdf', 'Full pipeline: template + PDF'],
   ])
   .epilogue(`
-${chalk.bold('📊 JSON Input Format:')}
-  Your JSON file should follow this structure:
-  {
-    "title": "Presentation Title",
-    "author": "Your Name",
-    "slides": [
-      {
-        "layout": "title",
-        "title": "Welcome",
-        "subtitle": "Subtitle text"
-      },
-      {
-        "layout": "text",
-        "title": "Agenda",
-        "bullets": ["Point 1", "Point 2", "Point 3"]
-      },
-      {
-        "layout": "chart",
-        "title": "Sales Data",
-        "chartType": "bar",
-        "data": {
-          "labels": ["Q1", "Q2", "Q3", "Q4"],
-          "datasets": [{
-            "label": "Revenue",
-            "data": [100, 150, 200, 250]
-          }]
-        }
-      }
-    ]
-  }
+${chalk.bold.blue('━━━ COMPREHENSIVE DOCUMENTATION FOR AI TOOLS & DEVELOPERS ━━━')}
 
-${chalk.bold('🎨 Supported Slide Layouts:')}
-  • title    - Title slide with subtitle
-  • text     - Bullet points and text
-  • image    - Image with caption
-  • chart    - Data visualizations (bar, line, pie, area, scatter, doughnut, radar)
-  • table    - Structured data tables
-  • notes    - Speaker notes slide
-  • custom   - Custom layout with positioned elements
+${chalk.bold('📊 JSON INPUT STRUCTURE:')}
+${chalk.gray('The input must be a valid JSON object with this schema:')}
 
-${chalk.bold('📋 Tips:')}
-  • Use templates to maintain brand consistency
-  • HTML tags work in text: <strong>, <em>, <u>
-  • Charts support multiple datasets
-  • Tables can have custom styling
-  • Images can be local paths or URLs
+{
+  "title": "string",           ${chalk.gray('// Presentation title (appears in file properties)')}
+  "author": "string",          ${chalk.gray('// Optional: Author name')}
+  "company": "string",         ${chalk.gray('// Optional: Company/organization name')}
+  "subject": "string",         ${chalk.gray('// Optional: Presentation subject/topic')}
+  "theme": {                   ${chalk.gray('// Optional: Custom theme settings')}
+    "primaryColor": "#HEX",
+    "secondaryColor": "#HEX",
+    "fontFamily": "string"
+  },
+  "slides": [                  ${chalk.gray('// Required: Array of slide objects')}
+    ${chalk.gray('// See slide types below')}
+  ]
+}
 
-${chalk.bold('🔗 More Information:')}
-  Documentation: https://github.com/wapdat/powerpoint-creator
-  Examples: https://github.com/wapdat/powerpoint-creator/tree/main/examples
-  NPM: https://www.npmjs.com/package/powerpoint-creator
+${chalk.bold('🎨 SLIDE TYPES & THEIR PROPERTIES:')}
+
+${chalk.cyan('1. TITLE SLIDE')} - Opening/section divider slides
+{
+  "layout": "title",
+  "title": "string",           ${chalk.gray('// Main title text')}
+  "subtitle": "string",        ${chalk.gray('// Optional: Subtitle')}
+  "author": "string",          ${chalk.gray('// Optional: Presenter name')}
+  "date": "string",            ${chalk.gray('// Optional: Date text')}
+  "backgroundColor": "#HEX",   ${chalk.gray('// Optional: Custom background color')}
+  "notes": "string"            ${chalk.gray('// Optional: Speaker notes')}
+}
+
+${chalk.cyan('2. TEXT/BULLET SLIDE')} - Content with bullet points
+{
+  "layout": "text",
+  "title": "string",           ${chalk.gray('// Slide title')}
+  "bullets": [                 ${chalk.gray('// Array of bullet points')}
+    "Plain text bullet",
+    "Text with <strong>HTML</strong> formatting",
+    "Supports <em>italic</em> and <u>underline</u>"
+  ],
+  "level": [0, 1, 1, 0],       ${chalk.gray('// Optional: Indent levels (0=main, 1=sub)')}
+  "notes": "string"            ${chalk.gray('// Optional: Speaker notes')}
+}
+
+${chalk.cyan('3. CHART SLIDE')} - Data visualizations
+{
+  "layout": "chart",
+  "title": "string",
+  "chartType": "bar|line|pie|area|scatter|doughnut|radar",
+  "data": {
+    "labels": ["Label1", "Label2"],    ${chalk.gray('// X-axis or pie labels')}
+    "datasets": [{
+      "label": "Series Name",
+      "data": [10, 20, 30],             ${chalk.gray('// Numeric values')}
+      "backgroundColor": "#HEX"         ${chalk.gray('// Optional: Custom color')}
+    }]
+  },
+  "options": {                          ${chalk.gray('// Optional chart settings')}
+    "showLegend": true,
+    "legendPosition": "top|bottom|left|right",
+    "showDataLabels": false
+  },
+  "notes": "string"
+}
+
+${chalk.cyan('4. TABLE SLIDE')} - Structured data tables
+{
+  "layout": "table",
+  "title": "string",
+  "headers": ["Col1", "Col2", "Col3"],  ${chalk.gray('// Column headers')}
+  "tableData": [                        ${chalk.gray('// 2D array of cell values')}
+    ["Row1Col1", "Row1Col2", "Row1Col3"],
+    ["Row2Col1", "Row2Col2", "Row2Col3"]
+  ],
+  "styling": {                          ${chalk.gray('// Optional table styling')}
+    "headerBackground": "#HEX",
+    "headerTextColor": "#HEX",
+    "alternateRows": true,
+    "fontSize": 14
+  },
+  "notes": "string"
+}
+
+${chalk.cyan('5. IMAGE SLIDE')} - Images with optional captions
+{
+  "layout": "image",
+  "title": "string",
+  "imagePath": "/path/to/image.jpg",   ${chalk.gray('// Local file path')}
+  "imageUrl": "https://...",            ${chalk.gray('// OR remote URL')}
+  "caption": "string",                  ${chalk.gray('// Optional: Image caption')}
+  "sizing": "contain|cover|stretch",    ${chalk.gray('// Optional: Fit mode')}
+  "notes": "string"
+}
+
+${chalk.cyan('6. NOTES SLIDE')} - Text-only speaker notes
+{
+  "layout": "notes",
+  "title": "string",
+  "content": "string"                   ${chalk.gray('// Multi-line text content')}
+}
+
+${chalk.cyan('7. CUSTOM SLIDE')} - Advanced positioning
+{
+  "layout": "custom",
+  "title": "string",
+  "elements": [                         ${chalk.gray('// Array of positioned elements')}
+    {
+      "type": "text|image|shape|chart",
+      "content": "varies by type",
+      "x": 1.5,                          ${chalk.gray('// Position in inches')}
+      "y": 2.0,
+      "width": 4,
+      "height": 3,
+      "styling": {}                      ${chalk.gray('// Type-specific styling')}
+    }
+  ],
+  "notes": "string"
+}
+
+${chalk.bold('🎨 PROFESSIONAL COLOR THEMES:')}
+${chalk.gray('Default business-professional color palette is applied automatically.')}
+${chalk.gray('Charts use muted grayscale tones for professional appearance.')}
+
+${chalk.bold('📐 SLIDE DIMENSIONS:')}
+• Standard 16:9 widescreen format (10" × 7.5")
+• Safe content area: 0.75" margins on all sides
+• Title area: 0.4" - 1.2" from top
+• Content area: 1.3" - 5.8" from top
+
+${chalk.bold('✨ KEY FEATURES:')}
+• Professional business color schemes by default
+• Clean, modern layout with proper spacing
+• Support for multiple chart datasets
+• HTML formatting in text (bold, italic, underline)
+• Template injection for brand consistency
+• Speaker notes for all slide types
+• Automatic text wrapping and sizing
+• High-quality vector graphics
+
+${chalk.bold('⚙️ PROCESSING PIPELINE:')}
+1. Parse JSON input → Validate schema
+2. Apply template (if provided) → Preserve branding
+3. Render slides → Position elements with proper spacing
+4. Generate PPTX → Create Office Open XML package
+5. Export PDF (if requested) → Via LibreOffice
+
+${chalk.bold('📁 OUTPUT:')}
+• PPTX file compatible with PowerPoint 2016+
+• No repair message when opening
+• Professional appearance suitable for business use
+• Optional PDF export for distribution
+
+${chalk.bold('🔗 RESOURCES:')}
+${chalk.cyan('Documentation')}: https://github.com/wapdat/powerpoint-creator
+${chalk.cyan('Examples')}: https://github.com/wapdat/powerpoint-creator/tree/main/examples
+${chalk.cyan('NPM Package')}: https://www.npmjs.com/package/powerpoint-creator
+${chalk.cyan('Issue Tracker')}: https://github.com/wapdat/powerpoint-creator/issues
+
+${chalk.gray('Version 1.0.1 | Built with PptxGenJS 4.0.1')}
   `)
   .wrap(100)
   .parseSync() as CLIOptions;

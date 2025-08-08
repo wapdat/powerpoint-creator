@@ -1,615 +1,418 @@
-# 🎯 powerpoint-creator
+# PowerPoint Creator 🎯
 
-<div align="center">
-  <h3>✨ Professional PowerPoint Generator with Template Support ✨</h3>
-  <p><strong>Transform JSON into stunning, business-ready presentations programmatically</strong></p>
-  
-  <p>
-    <img src="https://img.shields.io/npm/v/powerpoint-creator?style=flat-square&color=blue" alt="NPM Version">
-    <img src="https://img.shields.io/badge/TypeScript-Ready-blue?style=flat-square&logo=typescript" alt="TypeScript">
-    <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License">
-    <img src="https://img.shields.io/badge/Node-16+-green?style=flat-square&logo=node.js" alt="Node Version">
-  </p>
-</div>
+[![npm version](https://badge.fury.io/js/powerpoint-creator.svg)](https://www.npmjs.com/package/powerpoint-creator)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen)](https://nodejs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)](https://www.typescriptlang.org/)
 
----
+> Transform structured JSON data into professional PowerPoint presentations with a single command. Perfect for automation, reporting, and bulk presentation generation.
 
-## 🌟 Why powerpoint-creator?
+## 🌟 Key Features
 
-> **Stop manually creating repetitive presentations.** Generate professional PowerPoint files programmatically with complete control over styling, templates, and content.
+- **📊 7 Slide Layouts** - Title, text, charts, tables, images, notes, and custom layouts
+- **🎨 Professional Themes** - Business-ready color schemes and formatting
+- **📈 Rich Charts** - Bar, line, pie, area, scatter, doughnut, and radar charts
+- **🏢 Template Support** - Apply corporate templates to maintain brand consistency
+- **📝 Smart Formatting** - HTML support for bold, italic, and underlined text
+- **📐 Perfect Spacing** - Automatically positions content with professional margins
+- **🔄 Batch Processing** - Generate multiple presentations programmatically
+- **📄 PDF Export** - Optional PDF generation via LibreOffice
+- **✅ No Repair Needed** - Generates clean PPTX files that open without errors
 
-<div style="background: #f0f9ff; border-left: 4px solid #0ea5e9; padding: 15px; margin: 20px 0;">
-  <strong>💡 Perfect for:</strong>
-  <ul>
-    <li>📊 Automated business reports and dashboards</li>
-    <li>📈 Data-driven presentations from APIs/databases</li>
-    <li>🎯 Marketing decks with dynamic content</li>
-    <li>🏢 Corporate presentations with brand templates</li>
-    <li>📱 SaaS platforms needing presentation export</li>
-  </ul>
-</div>
+## 📥 Installation
 
----
-
-## ✨ Features at a Glance
-
-<table>
-  <tr>
-    <td width="50%">
-      
-### 🎨 **Rich Content Support**
-- Title slides with professional layouts
-- Multi-level bullet points with HTML formatting
-- High-quality image rendering
-- 7 chart types (bar, line, pie, and more)
-- Styled tables with custom formatting
-- Speaker notes integration
-- Custom layouts with precise positioning
-
-    </td>
-    <td width="50%">
-
-### ⚡ **Developer-Friendly**
-- **TypeScript** - Full type safety
-- **CLI & API** - Use anywhere
-- **JSON Schema** - Validated input
-- **Template Engine** - Brand consistency
-- **PDF Export** - One-click conversion
-- **Error Handling** - Detailed feedback
-- **Extensible** - Add custom layouts
-
-    </td>
-  </tr>
-</table>
-
----
-
-## 🚀 Quick Start
-
-### 📦 Installation
-
-<div style="display: flex; gap: 20px;">
-  <div style="flex: 1;">
-    
-**Global CLI Installation**
+### Global Installation (Recommended)
 ```bash
 npm install -g powerpoint-creator
 ```
 
-  </div>
-  <div style="flex: 1;">
-    
-**Project Installation**
+### Local Installation
 ```bash
 npm install powerpoint-creator
 ```
 
-  </div>
-</div>
-
-### 🎯 Create Your First Presentation
-
-#### **Option 1: CLI** (Fastest)
+### Development
 ```bash
-# Generate from JSON file
-powerpoint-creator --input slides.json --output my-presentation.pptx
-
-# Use a corporate template
-powerpoint-creator --input slides.json --template corporate.pptx --output final.pptx
-
-# Convert to PDF automatically
-powerpoint-creator --input slides.json --output presentation.pptx --pdf
+git clone https://github.com/wapdat/powerpoint-creator.git
+cd powerpoint-creator
+npm install
+npm run build
 ```
 
-#### **Option 2: Programmatic API**
-```typescript
-import { generatePresentation } from 'powerpoint-creator';
+## 🚀 Quick Start
 
-const presentation = {
-  title: "Q4 2024 Results",
-  author: "Jane Smith",
-  slides: [
+### Basic Usage
+```bash
+powerpoint-creator -i presentation.json -o output.pptx
+```
+
+### With Corporate Template
+```bash
+powerpoint-creator -i data.json -t company-template.pptx -o report.pptx
+```
+
+### From STDIN
+```bash
+cat data.json | powerpoint-creator -o presentation.pptx
+```
+
+### Generate PDF
+```bash
+powerpoint-creator -i slides.json -o deck.pptx --pdf
+```
+
+## 📋 JSON Structure
+
+### Complete Presentation Example
+```json
+{
+  "title": "Q4 2024 Business Review",
+  "author": "John Smith",
+  "company": "Acme Corp",
+  "slides": [
     {
-      layout: "title",
-      title: "Quarterly Business Review",
-      subtitle: "Record-Breaking Performance"
+      "layout": "title",
+      "title": "Q4 2024 Results",
+      "subtitle": "Record Breaking Quarter",
+      "author": "Leadership Team",
+      "date": "January 2025"
     },
     {
-      layout: "chart",
-      title: "Revenue Growth",
-      chartType: "line",
-      data: {
-        labels: ["Q1", "Q2", "Q3", "Q4"],
-        datasets: [{
-          label: "Revenue ($M)",
-          data: [8.2, 9.5, 11.3, 14.7],
-          backgroundColor: "#4472C4"
+      "layout": "text",
+      "title": "Key Achievements",
+      "bullets": [
+        "Revenue exceeded targets by 15%",
+        "Launched 3 new products successfully",
+        "Customer satisfaction increased to 92%"
+      ]
+    },
+    {
+      "layout": "chart",
+      "title": "Revenue Growth",
+      "chartType": "bar",
+      "data": {
+        "labels": ["Q1", "Q2", "Q3", "Q4"],
+        "datasets": [{
+          "label": "Revenue ($M)",
+          "data": [45, 52, 58, 67]
         }]
       }
+    },
+    {
+      "layout": "table",
+      "title": "Regional Performance",
+      "headers": ["Region", "Revenue", "Growth"],
+      "tableData": [
+        ["North America", "$30M", "+20%"],
+        ["Europe", "$22M", "+15%"],
+        ["Asia Pacific", "$15M", "+35%"]
+      ]
     }
   ]
-};
-
-await generatePresentation({
-  inputData: presentation,
-  outputPath: 'q4-results.pptx',
-  templatePath: 'brand-template.pptx' // optional
-});
+}
 ```
 
----
+## 🎨 Slide Types
 
-## 📊 Slide Layouts Gallery
-
-### 🎯 Available Slide Types
-
-<div style="background: #f9fafb; padding: 20px; border-radius: 8px;">
-
-#### **1️⃣ Title Slide**
-Professional opening slides with your branding
+### 1. Title Slide
+Creates opening or section divider slides with customizable backgrounds.
 
 ```json
 {
   "layout": "title",
-  "title": "2024 Annual Report",
-  "subtitle": "Exceptional Growth & Innovation",
-  "author": "Leadership Team",
-  "date": "March 2024",
-  "backgroundColor": "#003366"
+  "title": "Main Title",
+  "subtitle": "Subtitle Text",
+  "author": "Presenter Name",
+  "date": "January 2025",
+  "backgroundColor": "#2C3E50",
+  "notes": "Speaker notes here"
 }
 ```
 
-#### **2️⃣ Text/Bullet Slide**
-Clear, hierarchical content presentation
+### 2. Text/Bullet Slide
+Perfect for agendas, lists, and text-heavy content.
 
 ```json
 {
   "layout": "text",
-  "title": "Key Achievements",
+  "title": "Agenda",
   "bullets": [
-    "<strong>Revenue:</strong> Exceeded targets by 35%",
-    "<strong>Market Share:</strong> Gained 5 percentage points",
-    "  • Expanded to 3 new regions",
-    "  • Launched 2 flagship products",
-    "<strong>Team:</strong> Grew by 40% while maintaining culture"
-  ]
+    "Introduction and Overview",
+    "Q4 Performance Metrics",
+    "Strategic Initiatives",
+    "2025 Roadmap"
+  ],
+  "level": [0, 0, 1, 1],
+  "notes": "Cover each point for 5 minutes"
 }
 ```
 
-#### **3️⃣ Chart Slide**
-Data visualization with multiple chart types
+### 3. Chart Slide
+Visualize data with professional charts.
 
 ```json
 {
   "layout": "chart",
-  "title": "Performance Metrics",
-  "chartType": "bar",  // bar | line | pie | area | scatter | doughnut | radar
+  "title": "Sales Performance",
+  "chartType": "line",
   "data": {
-    "labels": ["Jan", "Feb", "Mar", "Apr"],
-    "datasets": [{
-      "label": "Sales",
-      "data": [42, 55, 67, 81],
-      "backgroundColor": "#4472C4"
-    }]
+    "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    "datasets": [
+      {
+        "label": "2024 Sales",
+        "data": [30, 45, 60, 70, 85, 95]
+      },
+      {
+        "label": "2023 Sales",
+        "data": [25, 35, 45, 55, 65, 75]
+      }
+    ]
+  },
+  "options": {
+    "showLegend": true,
+    "legendPosition": "bottom"
   }
 }
 ```
 
-#### **4️⃣ Table Slide**
-Structured data with professional styling
+**Supported Chart Types:**
+- `bar` - Vertical bar charts
+- `line` - Line graphs
+- `pie` - Pie charts
+- `area` - Area charts
+- `scatter` - Scatter plots
+- `doughnut` - Doughnut charts
+- `radar` - Radar/spider charts
+
+### 4. Table Slide
+Display structured data in professional tables.
 
 ```json
 {
   "layout": "table",
-  "title": "Regional Performance",
-  "headers": ["Region", "Revenue", "Growth", "Target"],
+  "title": "Project Status",
+  "headers": ["Project", "Status", "Completion", "Owner"],
   "tableData": [
-    ["North America", "$5.2M", "+28%", "✅ Exceeded"],
-    ["Europe", "$3.8M", "+42%", "✅ Exceeded"],
-    ["Asia Pacific", "$2.1M", "+55%", "✅ Exceeded"]
+    ["Website Redesign", "On Track", "75%", "Sarah"],
+    ["Mobile App", "At Risk", "45%", "John"],
+    ["API Development", "Complete", "100%", "Mike"]
   ],
   "styling": {
-    "headerBackground": "#003366",
+    "headerBackground": "#2C3E50",
+    "headerTextColor": "#FFFFFF",
     "alternateRows": true
   }
 }
 ```
 
-#### **5️⃣ Image Slide**
-Visual content with captions
+### 5. Image Slide
+Include images with optional captions.
 
 ```json
 {
   "layout": "image",
-  "title": "Product Showcase",
-  "imageUrl": "https://example.com/product.jpg",
-  "caption": "Our award-winning design",
-  "sizing": "contain"
+  "title": "Product Screenshot",
+  "imagePath": "./screenshots/dashboard.png",
+  "caption": "New dashboard interface",
+  "sizing": "contain",
+  "notes": "Highlight the improved UX"
 }
 ```
 
-</div>
+### 6. Notes Slide
+Text-only slides for detailed notes.
 
----
-
-## 🎨 Professional Templates
-
-### 🏢 Using Corporate Templates
-
-Transform any existing PowerPoint into a reusable template:
-
-```mermaid
-graph LR
-    A[Your Brand Template] --> B[powerpoint-creator]
-    C[JSON Data] --> B
-    B --> D[Branded Presentation]
-    
-    style A fill:#e3f2fd,stroke:#1976d2
-    style C fill:#f3e5f5,stroke:#7b1fa2
-    style B fill:#e8f5e9,stroke:#388e3c
-    style D fill:#fff3e0,stroke:#f57c00
+```json
+{
+  "layout": "notes",
+  "title": "Implementation Notes",
+  "content": "Detailed implementation plan:\n1. Phase 1: Planning\n2. Phase 2: Development\n3. Phase 3: Testing\n4. Phase 4: Deployment"
+}
 ```
 
-```bash
-# Your template preserves:
-# ✅ Corporate colors and fonts
-# ✅ Logo placement
-# ✅ Slide masters
-# ✅ Brand guidelines
+### 7. Custom Slide
+Advanced layouts with positioned elements.
 
-powerpoint-creator --input data.json --template corporate-brand.pptx --output final.pptx
+```json
+{
+  "layout": "custom",
+  "title": "Custom Layout",
+  "elements": [
+    {
+      "type": "text",
+      "content": "Custom positioned text",
+      "x": 1,
+      "y": 2,
+      "width": 4,
+      "height": 1
+    },
+    {
+      "type": "shape",
+      "content": {
+        "type": "rect",
+        "fill": "#3498DB"
+      },
+      "x": 6,
+      "y": 2,
+      "width": 3,
+      "height": 3
+    }
+  ]
+}
 ```
 
----
+## 🎨 Professional Styling
 
-## 📐 CLI Reference
+### Default Color Palette
+The package applies a professional business color scheme automatically:
+- **Primary**: Dark blue-gray (#2C3E50)
+- **Charts**: Professional grayscale palette
+- **Tables**: Navy headers with clean alternating rows
+- **Backgrounds**: Sophisticated solid colors
 
-### ⚙️ Command Options
+### Text Formatting
+Use HTML tags in any text field:
+- `<strong>Bold text</strong>`
+- `<em>Italic text</em>`
+- `<u>Underlined text</u>`
 
-| Option | Alias | Description | Example |
-|--------|-------|-------------|---------|
-| `--input` | `-i` | JSON input file or STDIN | `--input slides.json` |
-| `--output` | `-o` | Output PPTX path | `--output presentation.pptx` |
-| `--template` | `-t` | Template PPTX file | `--template brand.pptx` |
-| `--pdf` | `-p` | Convert to PDF | `--pdf` |
-| `--verbose` | `-v` | Detailed logging | `--verbose` |
-| `--help` | `-h` | Show help | `--help` |
+### Slide Dimensions
+- **Format**: 16:9 widescreen (10" × 7.5")
+- **Safe margins**: 0.75" on all sides
+- **Title area**: 0.4" - 1.2" from top
+- **Content area**: 1.3" - 5.8" from top
 
-### 💡 Pro Tips
+## 📂 Example Presentations
 
-<div style="background: #f0fdf4; border-left: 4px solid #22c55e; padding: 15px; margin: 20px 0;">
+We've included two complete example presentations:
 
-**🚀 Performance Optimization**
+1. **[Business Report Example](examples/business-report.json)** - Quarterly business review with charts and tables
+   - [View Generated PPTX](examples/business-report-example.pptx)
+
+2. **[Product Launch Example](examples/product-launch.json)** - Product announcement with mixed content types
+   - [View Generated PPTX](examples/product-launch-example.pptx)
+
+### Generate Examples
 ```bash
-# Process multiple presentations in parallel
-for file in *.json; do
-  powerpoint-creator --input "$file" --output "${file%.json}.pptx" &
+# Generate business report
+powerpoint-creator -i examples/business-report.json -o my-report.pptx
+
+# Generate product launch deck
+powerpoint-creator -i examples/product-launch.json -o my-launch.pptx
+```
+
+## 🔧 Advanced Usage
+
+### Batch Processing
+```bash
+# Process multiple JSON files
+for file in data/*.json; do
+  powerpoint-creator -i "$file" -o "output/$(basename $file .json).pptx"
 done
-wait
 ```
 
-**📊 Dynamic Data Integration**
+### API Integration
 ```bash
 # Generate from API response
-curl https://api.example.com/data | powerpoint-creator --output report.pptx
+curl https://api.example.com/report | powerpoint-creator -o report.pptx
 ```
 
-**🎯 Batch Processing**
+### Template Application
 ```bash
-# Convert all presentations to PDF
-find . -name "*.json" -exec powerpoint-creator --input {} --output {}.pptx --pdf \;
+# Apply branding template
+powerpoint-creator -i content.json -t templates/corporate.pptx -o branded.pptx
 ```
 
-</div>
+### With Data Processing
+```bash
+# Process with jq first
+cat raw-data.json | jq '.presentations[0]' | powerpoint-creator -o filtered.pptx
+```
 
----
+## 🛠️ CLI Options
 
-## 🛠️ Advanced API Usage
+| Option | Alias | Description | Default |
+|--------|-------|-------------|---------|
+| `--input` | `-i` | Input JSON file path | stdin |
+| `--output` | `-o` | Output PPTX file path | output.pptx |
+| `--template` | `-t` | Template PPTX file path | none |
+| `--pdf` | `-p` | Also generate PDF | false |
+| `--verbose` | `-v` | Show detailed progress | false |
+| `--help` | `-h` | Show help message | - |
+| `--version` | `-V` | Show version number | - |
 
-### 📦 TypeScript Integration
+## 📦 Programmatic Usage
 
-```typescript
-import { 
-  generatePresentation, 
-  validateInput,
-  Presentation,
-  SlideLayout 
-} from 'powerpoint-creator';
+```javascript
+const { PresentationGenerator } = require('powerpoint-creator');
 
-// Full type safety with TypeScript
-const createSalesPresentation = async (data: SalesData): Promise<void> => {
-  const presentation: Presentation = {
-    title: "Sales Report",
-    author: data.author,
-    theme: {
-      primaryColor: "#1976D2",
-      fontFamily: "Segoe UI"
-    },
-    slides: data.metrics.map(metric => ({
-      layout: "chart" as SlideLayout,
-      title: metric.title,
-      chartType: "bar",
-      data: formatChartData(metric)
-    }))
-  };
-
-  // Validate before generating
-  const validation = validateInput(presentation);
-  if (!validation.valid) {
-    throw new Error(`Invalid input: ${validation.errors}`);
-  }
-
-  await generatePresentation({
-    inputData: presentation,
-    outputPath: `sales-${Date.now()}.pptx`,
-    templatePath: process.env.TEMPLATE_PATH
-  });
+const presentation = {
+  title: "My Presentation",
+  slides: [
+    {
+      layout: "title",
+      title: "Welcome",
+      subtitle: "Let's get started"
+    }
+  ]
 };
+
+const generator = new PresentationGenerator();
+const buffer = await generator.generate(presentation);
+fs.writeFileSync('output.pptx', buffer);
 ```
 
-### 🔄 Streaming Large Presentations
+## 🔍 Troubleshooting
 
-```typescript
-// Handle large datasets efficiently
-import { createReadStream } from 'fs';
-import { pipeline } from 'stream/promises';
+### Common Issues
 
-const generateLargePresentation = async () => {
-  const dataStream = createReadStream('large-dataset.json');
-  
-  await pipeline(
-    dataStream,
-    parseJSONStream(),
-    transformToSlides(),
-    generatePresentation({
-      outputPath: 'large-presentation.pptx',
-      streaming: true
-    })
-  );
-};
-```
-
----
-
-## 📄 PDF Conversion
-
-### 🖨️ Setup PDF Export
-
-<table>
-<tr>
-<td width="33%">
-
-**🍎 macOS**
+**Issue**: "Command not found" after installation
 ```bash
-brew install --cask libreoffice
+# Ensure npm global bin is in PATH
+export PATH=$PATH:$(npm prefix -g)/bin
 ```
 
-</td>
-<td width="33%">
-
-**🐧 Linux**
+**Issue**: PDF generation not working
 ```bash
+# Install LibreOffice
+# macOS:
+brew install libreoffice
+# Ubuntu:
 sudo apt-get install libreoffice
 ```
 
-</td>
-<td width="33%">
-
-**🪟 Windows**
-Download from [libreoffice.org](https://www.libreoffice.org/download/)
-
-</td>
-</tr>
-</table>
-
-### ✨ Automatic Conversion
-
-```bash
-# Single command for PPTX + PDF
-powerpoint-creator --input slides.json --output presentation.pptx --pdf
-
-# Output:
-# ✅ presentation.pptx (PowerPoint)
-# ✅ presentation.pdf (PDF)
-```
-
----
-
-## 🏗️ Project Structure
-
-```
-powerpoint-creator/
-├── 📁 src/
-│   ├── 📄 cli.ts           # CLI entry point with yargs
-│   ├── 📄 index.ts         # Main API exports
-│   ├── 📄 types.ts         # TypeScript definitions
-│   ├── 📄 renderer.ts      # PptxGenJS rendering engine
-│   ├── 📄 template.ts      # Template processing with pptx-automizer
-│   ├── 📄 validator.ts     # JSON schema validation
-│   └── 📄 pdf-converter.ts # PDF conversion logic
-├── 📁 examples/
-│   ├── 📄 slides.json      # Complete example (14 slides)
-│   └── 📄 simple.json      # Quick start example
-├── 📁 dist/               # Compiled JavaScript
-├── 📄 package.json
-├── 📄 tsconfig.json
-└── 📄 README.md
-```
-
----
-
-## 🎯 Real-World Examples
-
-### 📊 Financial Report Generator
-
-```typescript
-// Quarterly report automation
-const generateQuarterlyReport = async (quarter: string) => {
-  const data = await fetchFinancialData(quarter);
-  
-  const presentation = {
-    title: `${quarter} Financial Report`,
-    slides: [
-      createTitleSlide(quarter),
-      createRevenueChart(data.revenue),
-      createExpenseTable(data.expenses),
-      createProjectionsChart(data.forecast),
-      createExecutiveSummary(data.summary)
-    ]
-  };
-  
-  await generatePresentation({
-    inputData: presentation,
-    templatePath: 'templates/financial.pptx',
-    outputPath: `reports/${quarter}-financial.pptx`,
-    convertToPdf: true
-  });
-};
-```
-
-### 🎨 Marketing Campaign Deck
-
-```typescript
-// Dynamic marketing presentations
-const createCampaignDeck = async (campaign: Campaign) => {
-  const slides = [
-    {
-      layout: "title",
-      title: campaign.name,
-      subtitle: campaign.tagline,
-      backgroundColor: campaign.brandColor
-    },
-    ...campaign.segments.map(segment => ({
-      layout: "text",
-      title: segment.title,
-      bullets: segment.keyPoints.map(point => 
-        `<strong>${point.metric}:</strong> ${point.value}`
-      )
-    })),
-    {
-      layout: "chart",
-      title: "Expected ROI",
-      chartType: "line",
-      data: formatROIData(campaign.projections)
-    }
-  ];
-  
-  return generatePresentation({
-    inputData: { slides },
-    outputPath: `campaigns/${campaign.id}.pptx`
-  });
-};
-```
-
----
-
-## 🚨 Error Handling
-
-### 📋 Comprehensive Validation
-
-```typescript
-import { validateInput } from 'powerpoint-creator';
-
-const result = validateInput(presentationData);
-if (!result.valid) {
-  console.error('Validation errors:');
-  result.errors?.forEach(error => {
-    console.error(`  ❌ ${error.field}: ${error.message}`);
-  });
-}
-```
-
-### 🛡️ Common Issues & Solutions
-
-| Issue | Solution |
-|-------|----------|
-| ❌ **Invalid JSON** | Use `--verbose` flag for detailed error location |
-| ❌ **Template not found** | Ensure path is absolute or relative to CWD |
-| ❌ **PDF conversion fails** | Install LibreOffice and check PATH |
-| ❌ **Large file timeout** | Increase Node memory: `node --max-old-space-size=4096` |
-| ❌ **Chart data mismatch** | Ensure data array length matches labels |
-
----
-
-## 📈 Performance & Optimization
-
-### ⚡ Benchmarks
-
-| Slides | Generation Time | Memory Usage |
-|--------|----------------|--------------|
-| 10 | ~1.2s | 45MB |
-| 50 | ~4.5s | 120MB |
-| 100 | ~8.3s | 210MB |
-| 500 | ~35s | 580MB |
-
-### 🚀 Optimization Tips
-
-<div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px;">
-
-- **Images**: Optimize before including (max 1920x1080)
-- **Charts**: Limit data points to 100 per series
-- **Templates**: Use lightweight templates (<5MB)
-- **Parallel**: Process multiple presentations concurrently
-- **Caching**: Reuse template instances for batch processing
-
-</div>
-
----
+**Issue**: Images not loading
+- Use absolute paths for local images
+- Ensure image files exist and are accessible
+- For URLs, ensure they're publicly accessible
 
 ## 🤝 Contributing
 
-We welcome contributions! See our [Contributing Guide](CONTRIBUTING.md) for details.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-### 🔧 Development Setup
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-```bash
-# Clone repository
-git clone https://github.com/wapdat/powerpoint-creator.git
-cd powerpoint-creator
+## 📄 License
 
-# Install dependencies
-npm install
-
-# Run in watch mode
-npm run dev
-
-# Run tests
-npm test
-
-# Build for production
-npm run build
-```
-
----
-
-## 📜 License
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
----
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
-Built with these excellent libraries:
+- Built with [PptxGenJS](https://gitbrent.github.io/PptxGenJS/) v4.0.1
+- Template support via [pptx-automizer](https://github.com/singerla/pptx-automizer)
+- CLI powered by [Yargs](https://yargs.js.org/)
+- Styled with [Chalk](https://github.com/chalk/chalk)
 
-- 🎯 [PptxGenJS](https://github.com/gitbrent/PptxGenJS) - Core presentation generation
-- 🔧 [pptx-automizer](https://github.com/singerla/pptx-automizer) - Template processing
-- 📊 [TypeScript](https://www.typescriptlang.org/) - Type safety
-- 🎨 [Yargs](https://yargs.js.org/) - CLI framework
+## 📞 Support
+
+- **Documentation**: [GitHub Wiki](https://github.com/wapdat/powerpoint-creator/wiki)
+- **Issues**: [GitHub Issues](https://github.com/wapdat/powerpoint-creator/issues)
+- **NPM**: [npmjs.com/package/powerpoint-creator](https://www.npmjs.com/package/powerpoint-creator)
 
 ---
 
-## 🔗 Links
-
-<div align="center">
-  <p>
-    <a href="https://github.com/wapdat/powerpoint-creator">📦 GitHub</a> •
-    <a href="https://www.npmjs.com/package/powerpoint-creator">🚀 NPM</a> •
-    <a href="https://github.com/wapdat/powerpoint-creator/issues">🐛 Issues</a> •
-    <a href="https://github.com/wapdat/powerpoint-creator/wiki">📚 Wiki</a>
-  </p>
-  
-  <p>
-    <strong>Made with ❤️ by developers, for developers</strong>
-  </p>
-</div>
+**Made with ❤️ for automating presentations**

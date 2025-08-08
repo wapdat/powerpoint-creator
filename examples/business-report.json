@@ -1,0 +1,93 @@
+{
+  "title": "Q4 2024 Business Review",
+  "author": "Executive Team",
+  "company": "Professional Corp",
+  "slides": [
+    {
+      "layout": "title",
+      "title": "Q4 2024 Business Review",
+      "subtitle": "Executive Summary",
+      "author": "Executive Team",
+      "date": "January 2025"
+    },
+    {
+      "layout": "text",
+      "title": "Key Achievements",
+      "bullets": [
+        "Revenue exceeded targets by 15%",
+        "Successfully launched 3 new products",
+        "Expanded into 2 new markets",
+        "Customer satisfaction increased to 92%",
+        "Reduced operational costs by 8%"
+      ]
+    },
+    {
+      "layout": "chart",
+      "title": "Revenue Performance",
+      "chartType": "bar",
+      "data": {
+        "labels": ["Q1", "Q2", "Q3", "Q4"],
+        "datasets": [
+          {
+            "label": "Actual Revenue ($M)",
+            "data": [45, 52, 58, 67]
+          },
+          {
+            "label": "Target Revenue ($M)",
+            "data": [42, 48, 54, 58]
+          }
+        ]
+      }
+    },
+    {
+      "layout": "chart",
+      "title": "Market Share Distribution",
+      "chartType": "pie",
+      "data": {
+        "labels": ["Our Company", "Competitor A", "Competitor B", "Others"],
+        "datasets": [
+          {
+            "label": "Market Share %",
+            "data": [32, 28, 25, 15]
+          }
+        ]
+      }
+    },
+    {
+      "layout": "table",
+      "title": "Regional Performance",
+      "headers": ["Region", "Q3 Revenue", "Q4 Revenue", "Growth", "Target Met"],
+      "tableData": [
+        ["North America", "$25M", "$30M", "+20%", "Yes"],
+        ["Europe", "$18M", "$22M", "+22%", "Yes"],
+        ["Asia Pacific", "$10M", "$12M", "+20%", "Yes"],
+        ["Latin America", "$5M", "$3M", "-40%", "No"]
+      ]
+    },
+    {
+      "layout": "chart",
+      "title": "Monthly Growth Trend",
+      "chartType": "line",
+      "data": {
+        "labels": ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        "datasets": [
+          {
+            "label": "Revenue Growth %",
+            "data": [5, 8, 12, 15, 18, 22]
+          }
+        ]
+      }
+    },
+    {
+      "layout": "text",
+      "title": "Next Quarter Priorities",
+      "bullets": [
+        "Scale operations in high-growth markets",
+        "Launch enterprise product line",
+        "Implement cost optimization program",
+        "Strengthen partner relationships",
+        "Enhance customer support capabilities"
+      ]
+    }
+  ]
+}
