@@ -188,12 +188,14 @@ export interface PresentationMetadata {
  * CLI options interface
  */
 export interface CLIOptions {
-  input: string;
+  input?: string;
+  markdown?: string;
   output: string;
   template?: string;
   pdf?: boolean;
   verbose?: boolean;
   help?: boolean;
+  version?: boolean;
 }
 
 /**

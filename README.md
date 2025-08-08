@@ -9,11 +9,12 @@
 
 ## 🌟 Key Features
 
+- **📝 Markdown to PowerPoint** - Convert markdown documents directly to presentations
 - **📊 7 Slide Layouts** - Title, text, charts, tables, images, notes, and custom layouts
 - **🎨 Professional Themes** - Business-ready color schemes and formatting
 - **📈 Rich Charts** - Bar, line, pie, area, scatter, doughnut, and radar charts
 - **🏢 Template Support** - Apply corporate templates to maintain brand consistency
-- **📝 Smart Formatting** - HTML support for bold, italic, and underlined text
+- **🎯 Smart Content Detection** - Automatically detects charts from CSV/table data
 - **📐 Perfect Spacing** - Automatically positions content with professional margins
 - **🔄 Batch Processing** - Generate multiple presentations programmatically
 - **📄 PDF Export** - Optional PDF generation via LibreOffice
@@ -46,6 +47,11 @@ npm run build
 powerpoint-creator -i presentation.json -o output.pptx
 ```
 
+### Markdown to PowerPoint
+```bash
+powerpoint-creator -m document.md -o presentation.pptx
+```
+
 ### With Corporate Template
 ```bash
 powerpoint-creator -i data.json -t company-template.pptx -o report.pptx
@@ -60,6 +66,69 @@ cat data.json | powerpoint-creator -o presentation.pptx
 ```bash
 powerpoint-creator -i slides.json -o deck.pptx --pdf
 ```
+
+## 📝 Markdown Support
+
+### Overview
+PowerPoint Creator can convert markdown documents directly to presentations. It automatically:
+- Converts headings to slide titles and sections
+- Detects and creates charts from CSV data and tables
+- Formats lists, emphasis, and code blocks
+- Splits long content across multiple slides
+- Processes YAML frontmatter for metadata
+
+### Markdown Structure
+```markdown
+---
+title: Presentation Title
+author: Your Name
+company: Company Name
+date: 2025-01-15
+theme: professional
+---
+
+# Main Title Slide
+
+## Section Divider
+
+### Content Slide Title
+
+- Bullet point 1
+- Bullet point 2
+- **Bold text**
+- *Italic text*
+
+### Data Table
+
+| Header 1 | Header 2 | Header 3 |
+|----------|----------|----------|
+| Data 1   | Data 2   | Data 3   |
+
+### Chart from CSV
+
+\`\`\`csv
+Month,Sales,Profit
+Jan,100,20
+Feb,120,25
+Mar,150,35
+\`\`\`
+
+![Image Caption](image.png)
+
+<!-- notes: Speaker notes go here -->
+```
+
+### Conversion Rules
+- **H1 (#)** → Title slides
+- **H2 (##)** → Section dividers with colored background
+- **H3 (###)** → New content slide or emphasized bullet
+- **Lists** → Bullet points with proper indentation
+- **Tables** → Table slides or charts (if numeric)
+- **Code blocks** → Notes slides or charts (if CSV/JSON)
+- **Images** → Image slides with captions
+- **Blockquotes** → Notes slides
+- **Horizontal rules (---)** → Slide breaks
+- **HTML comments** → Speaker notes or directives
 
 ## 📋 JSON Structure
 

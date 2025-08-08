@@ -230,3 +230,4 @@ export { SlideRenderer } from './renderer';
 export { TemplateProcessor } from './template';
 export { PdfConverter } from './pdf-converter';
 export { InputValidator } from './validator';
+export { MarkdownConverter, markdownToPowerPoint, MarkdownConverterOptions } from './markdown-converter';

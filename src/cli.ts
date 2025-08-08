@@ -13,6 +13,7 @@ import chalk from 'chalk';
 import ora from 'ora';
 import { generatePresentation } from './index';
 import { CLIOptions, Presentation } from './types';
+import { markdownToPowerPoint } from './markdown-converter';
 
 /**
  * Parse command-line arguments
@@ -24,7 +25,13 @@ const argv = yargs(hideBin(process.argv))
   .option('input', {
     alias: 'i',
     type: 'string',
-    description: 'Path to JSON input file (or pipe from STDIN)',
+    description: 'Path to JSON or Markdown input file (or pipe from STDIN)',
+    demandOption: false,
+  })
+  .option('markdown', {
+    alias: 'm',
+    type: 'string',
+    description: 'Path to Markdown input file (alternative to --input)',
     demandOption: false,
   })
   .option('output', {
@@ -58,27 +65,39 @@ const argv = yargs(hideBin(process.argv))
     ['$0 --input slides.json --output presentation.pptx', 'Basic usage: Generate from JSON file'],
     ['$0 -i data.json -o report.pptx -v', 'Short flags with verbose output'],
     ['', ''],
+    ['# Markdown to PowerPoint conversion', ''],
+    ['$0 --markdown document.md --output presentation.pptx', 'Convert markdown to PowerPoint'],
+    ['$0 -m README.md -o slides.pptx', 'Convert README to presentation'],
+    ['$0 --input report.md --output report.pptx', 'Auto-detect markdown from .md extension'],
+    ['', ''],
     ['# Using templates (preserve corporate branding)', ''],
     ['$0 --input slides.json --template company-template.pptx --output branded.pptx', 'Apply your company template'],
     ['$0 -i q4-data.json -t templates/corporate.pptx -o q4-report.pptx', 'Generate quarterly report with template'],
+    ['$0 -m notes.md -t brand.pptx -o final.pptx', 'Markdown with corporate template'],
     ['', ''],
     ['# PDF generation', ''],
     ['$0 --input slides.json --output deck.pptx --pdf', 'Generate both PPTX and PDF'],
     ['$0 -i data.json -o presentation.pptx -p -v', 'PDF with verbose output'],
+    ['$0 -m report.md -o report.pptx --pdf', 'Markdown to PPTX and PDF'],
     ['', ''],
     ['# Input from STDIN (pipe from other commands)', ''],
     ['cat slides.json | $0 --output presentation.pptx', 'Pipe JSON from file'],
+    ['cat README.md | $0 --markdown - --output slides.pptx', 'Pipe markdown from file'],
     ['curl https://api.example.com/data | $0 -o report.pptx', 'Generate from API response'],
     ['echo \'{"slides":[...]}\' | $0 -o quick.pptx', 'Inline JSON data'],
     ['', ''],
     ['# Batch processing', ''],
-    ['for file in *.json; do', '  Multiple presentations'],
+    ['for file in *.json; do', '  Multiple presentations from JSON'],
     ['  $0 -i "$file" -o "${file%.json}.pptx"', ''],
+    ['done', ''],
+    ['for file in *.md; do', '  Multiple presentations from Markdown'],
+    ['  $0 -m "$file" -o "${file%.md}.pptx"', ''],
     ['done', ''],
     ['', ''],
     ['# Advanced examples', ''],
     ['$0 -i <(jq \'.data\' api-response.json) -o filtered.pptx', 'Process JSON with jq first'],
     ['$0 -i report.json -t brand.pptx -o final.pptx --pdf', 'Full pipeline: template + PDF'],
+    ['$0 -m notes.md -t corporate.pptx -o deck.pptx --pdf', 'Markdown with template and PDF'],
   ])
   .epilogue(`
 ${chalk.bold.blue('━━━ COMPREHENSIVE DOCUMENTATION FOR AI TOOLS & DEVELOPERS ━━━')}
@@ -276,30 +295,54 @@ async function main(): Promise<void> {
   try {
     // Handle input source
     let inputData: Presentation;
+    const markdownInput = argv.markdown || (argv.input && argv.input.endsWith('.md'));
+    const inputPath = argv.markdown || argv.input;
     
-    if (argv.input) {
+    if (inputPath) {
       // Read from file
       spinner.start(chalk.blue('📂 Reading input file...'));
       
-      if (!fs.existsSync(argv.input)) {
-        spinner.fail(chalk.red(`❌ Input file not found: ${argv.input}`));
+      if (!fs.existsSync(inputPath)) {
+        spinner.fail(chalk.red(`❌ Input file not found: ${inputPath}`));
         console.log(chalk.gray('\nTip: Check the file path or use --help for examples'));
         process.exit(1);
       }
       
-      const inputContent = fs.readFileSync(argv.input, 'utf-8');
+      const inputContent = fs.readFileSync(inputPath, 'utf-8');
       
-      try {
-        inputData = JSON.parse(inputContent);
-        spinner.succeed(chalk.green(`✅ Input file parsed successfully (${inputData.slides?.length || 0} slides)`));
-      } catch (error) {
-        spinner.fail(chalk.red('❌ Invalid JSON in input file'));
-        if (argv.verbose) {
-          console.error(chalk.red('\nError details:'));
-          console.error(error);
-          console.log(chalk.gray('\nTip: Validate your JSON at https://jsonlint.com'));
+      // Check if it's markdown
+      if (markdownInput) {
+        spinner.text = chalk.blue('📝 Converting markdown to presentation...');
+        try {
+          inputData = await markdownToPowerPoint(inputContent, {
+            autoSplit: true,
+            slidesPerPage: 6,
+            includeTableOfContents: false,
+            slideNumbers: false,
+          });
+          spinner.succeed(chalk.green(`✅ Markdown converted successfully (${inputData.slides?.length || 0} slides)`));
+        } catch (error) {
+          spinner.fail(chalk.red('❌ Failed to convert markdown'));
+          if (argv.verbose) {
+            console.error(chalk.red('\nError details:'));
+            console.error(error);
+          }
+          process.exit(1);
         }
-        process.exit(1);
+      } else {
+        // Parse as JSON
+        try {
+          inputData = JSON.parse(inputContent);
+          spinner.succeed(chalk.green(`✅ Input file parsed successfully (${inputData.slides?.length || 0} slides)`));
+        } catch (error) {
+          spinner.fail(chalk.red('❌ Invalid JSON in input file'));
+          if (argv.verbose) {
+            console.error(chalk.red('\nError details:'));
+            console.error(error);
+            console.log(chalk.gray('\nTip: Validate your JSON at https://jsonlint.com'));
+          }
+          process.exit(1);
+        }
       }
     } else {
       // Read from STDIN
